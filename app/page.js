@@ -2,10 +2,10 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import Link from 'next/link';
 
 const developers = [
-  { name: "Kunal Agrawal", designation: "Team Leader", role: "Backend Developer", linkedin: "https://www.linkedin.com/in/kunalragrawal", github: "kunalagra" },
-  { name: "Deexith Madas", designation: "Team Member", role: "Backend Developer", linkedin: "https://www.linkedin.com/in/deexith-madas", github: "MDeexith" },
-  { name: "Aman Tiwari", designation: "Team Member", role: "Frontend Developer", linkedin: "https://www.linkedin.com/in/aman-tiwari03", github: "amant03" },
-  { name: "Ganesh Utla", designation: "Team Member", role: "Frontend Developer", linkedin: "https://www.linkedin.com/in/ganesh-utla-888abc", github: "ganesh-utla" },
+  { name: "Kunal Singh", designation: "Team Leader", role: "Fullstack Developer", linkedin: "#", github: "#" },
+  { name: "Manish Pandey", designation: "Team Member", role: "Backend Developer", linkedin: "#", github: "#" },
+  { name: "Kunal Malhotra", designation: "Team Member", role: "Frontend Developer", linkedin: "#", github: "#" },
+  { name: "Lavish Nehra", designation: "Team Member", role: "Frontend Developer", linkedin: "#", github: "#" },
 ];
 
 export default function Home() {
