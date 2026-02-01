@@ -25,6 +25,12 @@ export const authOptions = {
       return session;
     },
   },
+  events: {
+    async signOut() {
+      // Clear any problematic session data on sign out
+    },
+  },
+  debug: false, // Disable debug logging to reduce noise
   providers: [
     CredentialsProvider({
       name: 'Credentials',

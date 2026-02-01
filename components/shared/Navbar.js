@@ -16,7 +16,11 @@ const Navbar = async () => {
     userID = session?.user?._id;
   } catch (error) {
     // Handle JWT decryption errors (old session cookies with different secret)
-    console.log('Session error - user will need to re-login');
+    // Suppress the error logging as it's expected when secrets change
+    if (error.name !== 'JWEDecryptionFailed') {
+      console.error('Session error:', error);
+    }
+    // session and userID remain null, user will see login options
   }
 
   return (
