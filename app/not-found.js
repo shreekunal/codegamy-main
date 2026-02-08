@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 
+export const dynamic = 'force-dynamic';
+
 const page = () => {
   return (
     <div className='min-h-[70vh] flex flex-col justify-center items-center'>

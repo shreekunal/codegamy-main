@@ -1,6 +1,8 @@
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 const developers = [
   { name: "Kunal Singh", designation: "Team Leader", role: "Fullstack Developer", linkedin: "#", github: "#" },
   { name: "Manish Pandey", designation: "Team Member", role: "Backend Developer", linkedin: "#", github: "#" },
@@ -21,7 +23,7 @@ export default function Home() {
               <p className="text-7xl max-sm:text-6xl max-xs:text-4xl text-gray-600 font-bold text-center">Collaborate.</p>
             </div>
             <img
-              src='/logo.png'
+              src='/coding.png'
               alt='cognicode_logo'
               className='w-80 h-80 max-sm:w-64 max-sm:h-64 max-xs:w-48 max-xs:h-48 object-contain'
             />
@@ -66,10 +68,7 @@ function FeatureCard({ title, description }) {
 function DeveloperCard({ name, designation, role, linkedin, github }) {
   return (
     <div className='flex items-center w-full cursor-pointer group hover:ml-[15px] transition-all ease-in'>
-      <div className='flex rounded-full w-28 h-28 max-sm:hidden p-2 bg-gray-200 z-10 group-hover:bg-gray-400 transition-all ease-in'>
-        <img src={`https://avatars.githubusercontent.com/${github}`} alt={name} className='w-full h-full object-contain rounded-full' />
-      </div>
-      <div className='flex flex-grow flex-wrap gap-3 justify-between items-center bg-gray-100 py-4 px-12 ml-[-30px] rounded-r-full group-hover:bg-gray-900 transition-all ease-in'>
+      <div className='flex flex-grow flex-wrap gap-3 justify-between items-center bg-gray-100 py-4 px-12 rounded-full group-hover:bg-gray-900 transition-all ease-in'>
         <div className='flex flex-col'>
           <div className='flex items-center gap-2'>
             <h3 className="text-xl font-semibold mb-2 group-hover:text-white">{name}</h3>

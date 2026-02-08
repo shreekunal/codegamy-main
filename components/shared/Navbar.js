@@ -30,7 +30,7 @@ const Navbar = async () => {
 
         <Link href='/' className='flex justify-center items-center gap-3 '>
           <img
-            src='/logo.png'
+            src='/coding.png'
             alt='cognicode_logo'
             className='w-8 h-8 object-contain'
           />

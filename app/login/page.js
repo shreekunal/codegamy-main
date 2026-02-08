@@ -3,6 +3,8 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +49,7 @@ export default function LoginPage() {
       )}
       <Link href='/' className='flex justify-center items-center mb-12 gap-5'>
         <img
-          src='/logo.png'
+          src='/coding.png'
           alt='cognicode_logo'
           className='w-14 h-14 object-contain'
         />

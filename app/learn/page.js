@@ -1,10 +1,12 @@
-import CourseCard  from '@/app/learn/CourseCard';
+import CourseCard from '@/app/learn/CourseCard';
+
+export const dynamic = 'force-dynamic';
 
 const page = () => {
 
     const courses = [
         {
-            name : "cpp",
+            name: "cpp",
             title: "Introduction to C++",
             desc: "C++ is a high-level, general-purpose programming language created by Danish computer scientist Bjarne Stroustrup.",
             progress: 50,
@@ -45,7 +47,7 @@ const page = () => {
             {courses.map((course, index) => (
                 <CourseCard
                     key={index}
-                    name = {course.name}
+                    name={course.name}
                     title={course.title}
                     desc={course.desc}
                     progress={course.progress}

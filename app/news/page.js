@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+export const dynamic = 'force-dynamic';
+
 const NewsPage = () => {
   const [stories, setStories] = useState([]);
   const [selectedOption, setSelectedOption] = useState('top');
@@ -55,7 +57,7 @@ const NewsPage = () => {
     setSelectedOption(option);
     const title = option === 'top' ? 'Top News Articles' : option === 'new' ? 'Newest Articles' : 'Job Listings';
     setPageTitle(title);
-    document.title = title; 
+    document.title = title;
   };
 
   return (
@@ -87,7 +89,7 @@ const NewsPage = () => {
           </div>
         </div>
         <ol className="w-full max-w-6xl flex flex-wrap items-start mx-auto justify-center gap-4">
-          {loading && 
+          {loading &&
             <img src="/loader.svg" className='w-12 h-12 my-12 object-contain mx-auto' />
           }
           {!loading && stories.map((story, index) => (

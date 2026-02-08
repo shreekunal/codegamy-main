@@ -2,6 +2,7 @@ import Link from "next/link";
 import ContestCard from "./ContestCard"
 import ProfileCard from "./ProfileCard";
 
+export const dynamic = 'force-dynamic';
 
 const page = () => {
 
@@ -31,7 +32,7 @@ const page = () => {
         <div>
           <h1>Ongoing Contest</h1>
           <div className="mt-3 flex flex-col gap-2">
-            <ContestCard 
+            <ContestCard
               contestId={99}
               contestUrl={'/weekly-contest-99'}
               isOngoing={true}
@@ -43,12 +44,12 @@ const page = () => {
           <h1>Upcoming Contests</h1>
           <div className="mt-3 flex flex-col gap-2">
             {upcomingContests.map(contest => (
-              <ContestCard 
+              <ContestCard
                 key={contest.id}
                 contestId={contest.id}
                 contestUrl={contest.link}
                 isUpcoming={true}
-              />        
+              />
             ))}
           </div>
         </div>
@@ -57,7 +58,7 @@ const page = () => {
           <h1>Past Contests</h1>
           <div className="mt-3 flex flex-col gap-2">
             {pastContests.map(contest => (
-              <ContestCard 
+              <ContestCard
                 key={contest.id}
                 contestId={contest.id}
                 contestUrl={contest.link}
@@ -80,7 +81,7 @@ const page = () => {
           {users.map((user, index) => (
             <div key={index}>
               <ProfileCard
-                id={index+1}
+                id={index + 1}
                 username={user.name}
                 rating={user.rating}
                 attended={user.attended}
@@ -89,7 +90,7 @@ const page = () => {
             </div>
           ))}
         </div>
-        <div className="text-center mb-4"> 
+        <div className="text-center mb-4">
           <Link href='/global-rankings' className="text-blue-500">
             View more
           </Link>

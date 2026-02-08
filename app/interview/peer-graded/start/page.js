@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import VideoInterview from './VideoInterview';
 
+export const dynamic = 'force-dynamic';
+
 const page = () => {
 
     const [questions, setQuestions] = useState([]);
@@ -18,12 +20,12 @@ const page = () => {
     }, []);
 
 
-  return (
-    <div className='w-full min-h-[72vh] max-w-6xl px-2 py-12 mx-auto flex items-center justify-center'>
-        
-        <VideoInterview questions={questions} />
-    </div>
-  )
+    return (
+        <div className='w-full min-h-[72vh] max-w-6xl px-2 py-12 mx-auto flex items-center justify-center'>
+
+            <VideoInterview questions={questions} />
+        </div>
+    )
 }
 
 export default page

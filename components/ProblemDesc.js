@@ -14,8 +14,8 @@ const ProblemDesc = ({ problems }) => {
     const [disLike, setDisLike] = useState(false);
     const [favorite, setFavorite] = useState(false);
     const difficultyColors = {
-        'Hard' : 'bg-red-500' ,
-        'Medium': 'bg-orange-500' ,
+        'Hard': 'bg-red-500',
+        'Medium': 'bg-orange-500',
         'Easy': 'bg-green-500'
     };
 
@@ -40,7 +40,7 @@ const ProblemDesc = ({ problems }) => {
     }
 
     const handelFavoritesproblems = async () => {
-    
+
     }
 
     return (
@@ -115,8 +115,8 @@ const ProblemDesc = ({ problems }) => {
                     {clickedProblems?.constraints && (
                         <>
                             <p className='font-bold'>Constraints:</p>
-                            <div className='font-medium' 
-                                dangerouslySetInnerHTML={{ __html: clickedProblems?.constraints || '' }} 
+                            <div className='font-medium'
+                                dangerouslySetInnerHTML={{ __html: clickedProblems?.constraints || '' }}
                             />
                         </>
                     )}

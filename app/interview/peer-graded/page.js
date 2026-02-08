@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
+export const dynamic = 'force-dynamic';
+
 const page = () => {
 
   const [isChecked, setIsChecked] = useState(false);
@@ -16,7 +18,7 @@ const page = () => {
     try {
       const response = await axios.get("/api/getUserInfo");
       const data = response.data;
-      setUsername(data.name? data.name : " ");
+      setUsername(data.name ? data.name : " ");
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
@@ -46,7 +48,7 @@ const page = () => {
           <li className="list-decimal">
             To minimize technical difficulties during the interview, please use a
             computer with a camera and microphone. Also, update to the latest
-            version of Chrome. 
+            version of Chrome.
           </li>
           <li className=" list-decimal">
             To avoid technical difficulties during the
@@ -54,7 +56,7 @@ const page = () => {
           </li>
           <li className="list-decimal">
             During the interview, we may collect some data in order to provide you
-            with better online interview services. 
+            with better online interview services.
           </li>
           <li className="list-decimal">
             There will be one question and you will be given 90 seconds to speak. It is preferred to answer the question in brief and meaningful way.
@@ -62,15 +64,15 @@ const page = () => {
         </ol>
 
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setIsChecked(prev => !prev)}>
-          <input type="checkbox" className="w-4 h-4 rounded-lg" checked={isChecked} onChange={() => {}}/>
+          <input type="checkbox" className="w-4 h-4 rounded-lg" checked={isChecked} onChange={() => { }} />
           <p className={`${!isChecked && 'text-gray-2'}`}>I have carefully read and agree to the above content</p>
         </div>
 
         <div>
-          <button 
+          <button
             onClick={handleStart}
-          className="w-[200px] bg-blue-500 text-light-1 rounded-xl px-3 py-2 disabled:cursor-not-allowed" disabled={!isChecked}>
-            {loading? 
+            className="w-[200px] bg-blue-500 text-light-1 rounded-xl px-3 py-2 disabled:cursor-not-allowed" disabled={!isChecked}>
+            {loading ?
               <img src="/loader.svg" className="w-6 h-6 object-contain mx-auto" /> :
               "Start Interview"
             }

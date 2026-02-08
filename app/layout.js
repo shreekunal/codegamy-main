@@ -2,6 +2,8 @@ import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: "Cognicode - Your Coding Ground",
   description: "Best Coding platform for all your needs",

@@ -6,6 +6,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 const Form = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -42,30 +44,30 @@ const Form = () => {
     setError(null);
 
     try {
-        const response = await axios.post('/api/profileUpdate', formData);
-        router.push('/profile');
+      const response = await axios.post('/api/profileUpdate', formData);
+      router.push('/profile');
     } catch (error) {
-        if (error.response) {
-            console.error("Server responded with error:", error.response.data);
-            setError(error.response.data.message || 'An error occurred.');
-        } else if (error.request) {
-            console.error("No response received:", error.request);
-            setError('No response received from the server.');
-        } else {
-            console.error("Request setup error:", error.message);
-            setError('Error setting up the request.');
-        }
+      if (error.response) {
+        console.error("Server responded with error:", error.response.data);
+        setError(error.response.data.message || 'An error occurred.');
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+        setError('No response received from the server.');
+      } else {
+        console.error("Request setup error:", error.message);
+        setError('Error setting up the request.');
+      }
     } finally {
-        setIsLoading(false);
-        setFormData({
-            name: '',
-            age: '',
-            gender: '',
-            college: '',
-            city: '',
-            country: '',
-            phone: '',
-        });
+      setIsLoading(false);
+      setFormData({
+        name: '',
+        age: '',
+        gender: '',
+        college: '',
+        city: '',
+        country: '',
+        phone: '',
+      });
     }
   };
 
@@ -154,18 +156,18 @@ const Form = () => {
           {error}
         </div>
       )}
-      
+
       <button
         type="submit"
         className="mb-4 bg-dark-1 text-center text-white px-4 py-2 rounded-xl disabled:cursor-not-allowed"
-        disabled={formData.age==='' || formData.city==='' || formData.college==='' || formData.country==='' || formData.gender==='' || formData.name==='' || formData.phone==='' || isLoading}
+        disabled={formData.age === '' || formData.city === '' || formData.college === '' || formData.country === '' || formData.gender === '' || formData.name === '' || formData.phone === '' || isLoading}
         onClick={handleSubmit}
       >
-        {isLoading? (
+        {isLoading ? (
           <img src="loader.svg" alt="loading" className="w-6 h-6 object-contain mx-auto" />
         ) : "Update"}
       </button>
-      
+
     </form>
   );
 };

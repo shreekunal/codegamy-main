@@ -22,8 +22,8 @@ const Problems = () => {
     }, []);
 
     const difficultyColors = {
-        'Hard' : 'bg-red-700' ,
-        'Medium': 'bg-orange-600' ,
+        'Hard': 'bg-red-700',
+        'Medium': 'bg-orange-600',
         'Easy': 'bg-green-600'
     };
 
@@ -67,15 +67,15 @@ const Problems = () => {
                                 <tr key={index} className="bg-light-2 hover:bg-light-4">
                                     <td className="p-4 text-center">
                                         <div>
-                                            {index+1}
+                                            {index + 1}
                                         </div>
                                     </td>
                                     <th scope="row" className="px-6 py-4 hover:text-blue-500 hover:font-semibold hover:cursor-pointer font-medium whitespace-nowrap transition-all ease-in">
-                                        <div className='w-[300px] text-ellipsis overflow-hidden' 
+                                        <div className='w-[300px] text-ellipsis overflow-hidden'
                                             onClick={() => {
-                                            router.push(`/problems/${problem.id}`);
-                                        }}>
-                                            {problem.title} 
+                                                router.push(`/problems/${problem.id}`);
+                                            }}>
+                                            {problem.title}
                                         </div>
                                     </th>
                                     <td>
@@ -87,7 +87,7 @@ const Problems = () => {
                                         {problem.category}
                                     </td>
                                     <td className="px-6 py-4 cursor-pointer">
-                                    <ImCheckboxChecked size={20} color={'green'} className='mx-auto'/>
+                                        <ImCheckboxChecked size={20} color={'green'} className='mx-auto' />
                                     </td>
                                     <td className="px-6 py-4 cursor-pointer">
                                         <ImYoutube2 color={'red'} size={35} onClick={() => openVideoPopup(problem.videoId)} className='mx-auto' />
