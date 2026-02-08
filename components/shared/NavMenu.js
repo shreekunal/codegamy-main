@@ -18,7 +18,7 @@ const NavMenu = ({ user }) => {
         onClick={() => setOpen(true)}
       />
       <div className={`${!open && 'hidden'}`}>
-        <div className={`flex flex-col absolute z-10 top-5 right-2 w-[300px] bg-light-2 p-3 rounded-xl shadow-xl`}>
+        <div className={`flex flex-col absolute z-10 top-5 right-2 w-[300px] bg-light-2 dark:bg-dark-3 p-3 rounded-xl shadow-xl`}>
           <img
             src="/menu.png"
             alt="menu"
@@ -28,7 +28,7 @@ const NavMenu = ({ user }) => {
           <Link
             href={user ? "/learn" : "/login"}
             className={`py-2 px-6 font-medium ${(pathname === "/learn" || pathname.startsWith("/courses")) &&
-              "bg-dark-1 text-white rounded-full"
+              "bg-dark-1 text-white dark:bg-purple-500 rounded-full"
               }`}
             onClick={() => setOpen(false)}
           >
@@ -36,7 +36,7 @@ const NavMenu = ({ user }) => {
           </Link>
           <Link
             href={user ? "/problems" : "/login"}
-            className={`py-2 px-6 font-medium ${pathname === "/problems" && "bg-dark-1 text-white rounded-full"
+            className={`py-2 px-6 font-medium ${pathname === "/problems" && "bg-dark-1 text-white dark:bg-purple-500 rounded-full"
               }`}
             onClick={() => setOpen(false)}
           >

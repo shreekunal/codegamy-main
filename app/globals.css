@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,8 +9,12 @@
     @apply box-border list-none p-0 m-0 scroll-smooth;
   }
 
+  html {
+    @apply transition-colors duration-300;
+  }
+
   body {
-    @apply bg-white text-dark-1 min-h-screen font-poppins;
+    @apply bg-white text-dark-1 min-h-screen font-poppins dark:bg-dark-1 dark:text-light-1;
   }
 
   h1 {
@@ -43,15 +47,13 @@
     padding: 0.125rem;
     letter-spacing: 1px;
     white-space: pre-wrap;
-    background-color: #EBEBEB;
+    background-color: #ebebeb;
   }
 
   strong {
     font-weight: 500;
   }
-
 }
-
 
 .split {
   display: flex;
@@ -73,7 +75,8 @@
   cursor: col-resize;
 }
 
-.gutter.gutter-vertical, ::-webkit-scrollbar {
+.gutter.gutter-vertical,
+::-webkit-scrollbar {
   width: 5px;
 }
 
@@ -84,7 +87,7 @@
 }
 
 .example-card pre {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border-radius: 0.5rem;
   font-size: 0.98rem;
   line-height: 1.25rem;

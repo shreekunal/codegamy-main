@@ -1,30 +1,42 @@
+'use client'
+
 import Link from 'next/link'
-import React from 'react'
-import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
-import { getServerSession } from "next-auth/next"
+import React, { useState, useEffect } from 'react'
+import { useSession } from "next-auth/react"
 import NavLinks from './NavLinks'
 import Image from 'next/image'
 import NavMenu from './NavMenu'
 
-const Navbar = async () => {
+const Navbar = () => {
+  const { data: session } = useSession()
+  const userID = session?.user?._id
 
-  let session = null;
-  let userID = null;
+  const [theme, setTheme] = useState('light')
 
-  try {
-    session = await getServerSession(authOptions);
-    userID = session?.user?._id;
-  } catch (error) {
-    // Handle JWT decryption errors (old session cookies with different secret)
-    // Suppress the error logging as it's expected when secrets change
-    if (error.name !== 'JWEDecryptionFailed') {
-      console.error('Session error:', error);
+  useEffect(() => {
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme') || 'light'
+    setTheme(savedTheme)
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
     }
-    // session and userID remain null, user will see login options
+  }, [])
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
   }
 
   return (
-    <div className='w-full bg-light-1'>
+    <div className='w-full bg-light-1 dark:bg-dark-2 border-b border-light-3 dark:border-dark-3'>
 
       <div className='max-w-6xl mx-auto flex justify-between items-center px-2 py-6'>
 
@@ -43,9 +55,12 @@ const Navbar = async () => {
 
         <div className='flex items-center gap-3'>
 
-          <button className='w-10 h-10 max-sm:w-8 max-sm:h-8 flex items-center justify-center hover:bg-gray-100 rounded-full transition-colors'>
+          <button
+            onClick={toggleTheme}
+            className='w-10 h-10 max-sm:w-8 max-sm:h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors'
+          >
             <img
-              src='/dark-mode.png'
+              src={theme === 'light' ? '/dark-mode.png' : '/light-mode.png'}
               alt='theme toggle'
               className='w-10 h-10 object-contain'
             />
