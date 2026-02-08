@@ -18,18 +18,6 @@ const NavLinks = ({ user }) => {
         className={`py-2 px-6 font-medium ${pathname==='/problems' && 'bg-dark-1 text-white rounded-full'}`}>
           Problems
       </Link>
-      <Link href={user? "/contests" : "/login"} 
-        className={`py-2 px-6 font-medium ${pathname==='/contests' && 'bg-dark-1 text-white rounded-full'}`}>
-          Contest
-      </Link>
-      <Link href={user? "/interview" : "/login"} 
-        className={`py-2 px-6 font-medium ${pathname==='/interview' && 'bg-dark-1 text-white rounded-full'}`}>
-          Interview
-      </Link>
-      <Link href={user? "/news" : "/login"} 
-        className={`py-2 px-6 font-medium ${pathname==='/news' && 'bg-dark-1 text-white rounded-full'}`}>
-          News
-      </Link>
     </div>
   );
 };

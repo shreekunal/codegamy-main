@@ -33,14 +33,8 @@ export default function Home() {
             <Link href="/problems">
               <FeatureCard title="Problems" description="Dive into a vast array of coding problems to hone your skills and master various algorithms and data structures." />
             </Link>
-            <Link href="/contests">
-              <FeatureCard title="Contests" description="Put your skills to the test in our thrilling coding contests. Compete against top programmers and climb the leaderboard to showcase your talent." />
-            </Link>
-            <Link href="/interview">
-              <FeatureCard title="Interview Prep" description="Ace your coding interviews with our curated collection of questions and resources tailored to help you succeed." />
-            </Link>
-            <Link href="/news">
-              <FeatureCard title="News" description="Stay updated with the latest industry news, trends, and advancements in the world of technology and software development." />
+            <Link href="/learn">
+              <FeatureCard title="Learn" description="Master programming fundamentals with our comprehensive learning paths and interactive tutorials." />
             </Link>
           </div>
 

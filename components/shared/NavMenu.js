@@ -45,33 +45,6 @@ const NavMenu = ({ user }) => {
             >
             Problems
             </Link>
-            <Link
-            href={user ? "/contests" : "/login"}
-            className={`py-2 px-6 font-medium ${
-                pathname === "/contests" && "bg-dark-1 text-white rounded-full"
-            }`}
-            onClick={() => setOpen(false)}
-            >
-            Contest
-            </Link>
-            <Link
-            href={user ? "/interview" : "/login"}
-            className={`py-2 px-6 font-medium ${
-                pathname === "/interview" && "bg-dark-1 text-white rounded-full"
-            }`}
-            onClick={() => setOpen(false)}
-            >
-            Interview
-            </Link>
-            <Link
-            href={user ? "/news" : "/login"}
-            className={`py-2 px-6 font-medium ${
-                pathname === "/news" && "bg-dark-1 text-white rounded-full"
-            }`}
-            onClick={() => setOpen(false)}
-            >
-            News
-            </Link>
         </div>
       </div>
     </div>
