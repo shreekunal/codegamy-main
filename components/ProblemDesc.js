@@ -45,12 +45,12 @@ const ProblemDesc = ({ problems }) => {
 
     return (
         <div className='w-full flex flex-col overflow-x-hidden overflow-y-auto px-1'>
-            <div className='flex h-11 w-full items-center pt-2 bg-light-3 rounded-t-lg px-2'>
-                <div className='bg-light-2 rounded-t-md px-5 py-[10px] text-sm cursor-pointer'>
+            <div className='flex h-11 w-full items-center pt-2 bg-light-3 dark:bg-dark-4 rounded-t-lg px-2'>
+                <div className='bg-light-2 dark:bg-dark-3 rounded-t-md px-5 py-[10px] text-sm cursor-pointer dark:text-light-1'>
                     Description
                 </div>
             </div>
-            <div className='bg-light-2 rounded-b-lg flex-grow'>
+            <div className='bg-light-2 dark:bg-dark-3 dark:text-light-1 rounded-b-lg flex-grow'>
                 <h2 className='font-semibold text-xl p-5'>
                     {clickedProblems?.order}. {clickedProblems?.title}
                 </h2>
@@ -101,13 +101,13 @@ const ProblemDesc = ({ problems }) => {
                 </div>
                 <div className='mt-4 px-5'>
                     <h2 className='font-bold'>Sample Input</h2>
-                    <div className='bg-light-3 font-mono mt-1 py-2 px-3 rounded-lg'>
+                    <div className='bg-light-3 dark:bg-dark-4 font-mono mt-1 py-2 px-3 rounded-lg'>
                         <div dangerouslySetInnerHTML={{ __html: clickedProblems?.sampleInput || '' }} />
                     </div>
                 </div>
                 <div className='mt-4 px-5'>
                     <h2 className='font-bold'>Sample Output</h2>
-                    <div className='bg-light-3 font-mono mt-1 py-2 px-3 rounded-lg'>
+                    <div className='bg-light-3 dark:bg-dark-4 font-mono mt-1 py-2 px-3 rounded-lg'>
                         <div dangerouslySetInnerHTML={{ __html: clickedProblems?.sampleOutput || '' }} />
                     </div>
                 </div>

@@ -57,12 +57,12 @@ const Navbar = () => {
 
           <button
             onClick={toggleTheme}
-            className='w-10 h-10 max-sm:w-8 max-sm:h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors'
+            className='w-10 h-10 max-sm:w-8 max-sm:h-8 flex items-center justify-center hover:bg-light-3 dark:hover:bg-dark-4 rounded-full transition-colors'
           >
             <img
               src={theme === 'light' ? '/dark-mode.png' : '/light-mode.png'}
               alt='theme toggle'
-              className='w-10 h-10 object-contain'
+              className='w-10 h-10 object-contain dark:invert dark:brightness-200'
             />
           </button>
 

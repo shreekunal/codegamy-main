@@ -23,7 +23,7 @@ const Form = () => {
     try {
       const response = await axios.get("/api/getUserInfo");
       const data = response.data;
-      setFormData(data);
+      setFormData(prev => ({ ...prev, ...data }));
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
@@ -84,7 +84,7 @@ const Form = () => {
         placeholder='Full Name'
         value={formData.name}
         onChange={handleChange}
-        className="shadow-md p-4 bg-light-2 rounded-xl w-full"
+        className="shadow-md p-4 bg-light-2 dark:bg-dark-3 dark:text-light-1 dark:border dark:border-dark-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-accent"
         required
       />
       <div className="flex justify-between gap-3">
@@ -95,7 +95,7 @@ const Form = () => {
           placeholder='Age'
           value={formData.age}
           onChange={handleChange}
-          className="shadow-md p-4 bg-light-2 rounded-xl w-full"
+          className="shadow-md p-4 bg-light-2 dark:bg-dark-3 dark:text-light-1 dark:border dark:border-dark-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-accent"
           required
         />
         <select
@@ -103,7 +103,7 @@ const Form = () => {
           id="gender"
           value={formData.gender}
           onChange={handleChange}
-          className="shadow-md p-4 bg-light-2 rounded-xl w-full"
+          className="shadow-md p-4 bg-light-2 dark:bg-dark-3 dark:text-light-1 dark:border dark:border-dark-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-accent"
         >
           <option value="">Select Gender</option>
           <option value="Male">Male</option>
@@ -117,7 +117,7 @@ const Form = () => {
         placeholder='Phone'
         value={formData.phone}
         onChange={handleChange}
-        className="shadow-md p-4 bg-light-2 rounded-xl w-full"
+        className="shadow-md p-4 bg-light-2 dark:bg-dark-3 dark:text-light-1 dark:border dark:border-dark-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-accent"
         required
       />
       <input
@@ -127,7 +127,7 @@ const Form = () => {
         placeholder='Institute Name'
         value={formData.college}
         onChange={handleChange}
-        className="shadow-md p-4 bg-light-2 rounded-xl w-full"
+        className="shadow-md p-4 bg-light-2 dark:bg-dark-3 dark:text-light-1 dark:border dark:border-dark-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-accent"
         required
       />
       <input
@@ -137,7 +137,7 @@ const Form = () => {
         placeholder='City'
         value={formData.city}
         onChange={handleChange}
-        className="shadow-md p-4 bg-light-2 rounded-xl w-full"
+        className="shadow-md p-4 bg-light-2 dark:bg-dark-3 dark:text-light-1 dark:border dark:border-dark-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-accent"
         required
       />
       <input
@@ -147,19 +147,19 @@ const Form = () => {
         placeholder='Country'
         value={formData.country}
         onChange={handleChange}
-        className="shadow-md p-4 bg-light-2 rounded-xl w-full"
+        className="shadow-md p-4 bg-light-2 dark:bg-dark-3 dark:text-light-1 dark:border dark:border-dark-4 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-accent"
         required
       />
 
       {error && (
-        <div className="text-center bg-red-500 py-2 px-6 text-white rounded-full cursor-pointer" onClick={() => setError(null)}>
+        <div className="text-center bg-accent py-2 px-6 text-white rounded-full cursor-pointer" onClick={() => setError(null)}>
           {error}
         </div>
       )}
 
       <button
         type="submit"
-        className="mb-4 bg-dark-1 text-center text-white px-4 py-2 rounded-xl disabled:cursor-not-allowed"
+        className="mb-4 bg-accent hover:bg-accent-dark text-center text-white px-4 py-2 rounded-xl disabled:cursor-not-allowed disabled:opacity-50 transition-colors"
         disabled={formData.age === '' || formData.city === '' || formData.college === '' || formData.country === '' || formData.gender === '' || formData.name === '' || formData.phone === '' || isLoading}
         onClick={handleSubmit}
       >
@@ -176,7 +176,7 @@ export default function Home() {
   return (
     <div className="flex items-center justify-center mt-8 px-2">
       <div className="max-w-lg w-full">
-        <Link href="/profile" className='text-gray-2'>⯇ Back</Link>
+        <Link href="/profile" className='text-gray-1 dark:text-gray-2 hover:text-accent transition-colors'>⯇ Back</Link>
         <h1 className="text-2xl font-bold my-4">Update Profile</h1>
         <Form />
       </div>

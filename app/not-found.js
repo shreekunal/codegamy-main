@@ -9,7 +9,7 @@ const page = () => {
       <h1 className='text-7xl font-bold mb-12'>
         404 | Page not found
       </h1>
-      <Link href='/' className='text-white bg-dark-1 py-3 px-6 rounded-xl'>
+      <Link href='/' className='text-white bg-accent hover:bg-accent-dark py-3 px-6 rounded-xl transition-colors'>
         Back to Home
       </Link>
     </div>

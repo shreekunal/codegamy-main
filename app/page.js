@@ -1,84 +1,202 @@
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
-import Link from 'next/link';
+"use client";
 
-export const dynamic = 'force-dynamic';
+import { useEffect, useRef } from "react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import "./duo-studio.css";
 
-const developers = [
-  { name: "Kunal Singh", designation: "Team Leader", role: "Fullstack Developer", linkedin: "#", github: "#" },
-  { name: "Manish Pandey", designation: "Team Member", role: "Backend Developer", linkedin: "#", github: "#" },
-  { name: "Kunal Malhotra", designation: "Team Member", role: "Frontend Developer", linkedin: "#", github: "#" },
-  { name: "Lavish Nehra", designation: "Team Member", role: "Frontend Developer", linkedin: "#", github: "#" },
-];
+export const dynamic = "force-dynamic";
 
 export default function Home() {
-  return (
-    <>
-      <main className="min-h-screen">
-        <div className="container mx-auto px-4 py-8">
+  const cursorRef = useRef(null);
+  const { data: session } = useSession();
+  const userID = session?.user?._id;
 
-          <div className='flex justify-between items-center max-w-5xl mx-auto mb-20 max-md:flex-col-reverse max-md:gap-5'>
-            <div className='flex flex-col gap-6 items-start max-sm:gap-5 max-xs:gap-3'>
-              <p className="text-7xl max-sm:text-6xl max-xs:text-4xl text-gray-400 font-bold text-center">Learn</p>
-              <p className="text-7xl max-sm:text-6xl max-xs:text-4xl text-gray-500 font-bold text-center">Compete</p>
-              <p className="text-7xl max-sm:text-6xl max-xs:text-4xl text-gray-600 font-bold text-center">Collaborate.</p>
+  useEffect(() => {
+    let ctx;
+
+    const init = async () => {
+      const gsapMod = await import("gsap");
+      const gsap = gsapMod.default;
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* ---------- hero parallax ---------- */
+      const tl1 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top 30%",
+          end: "bottom 45%",
+          scrub: 0.2,
+        },
+      });
+      tl1.to(".hero-section h1", { x: -100 }, "hero");
+      tl1.to(".hero-section h2", { x: 100 }, "hero");
+      tl1.to(".hero-section video", { width: "93%" }, "hero");
+
+      /* ---------- custom cursor ---------- */
+      const cursor = cursorRef.current;
+
+      const onMouseMove = (e) => {
+        gsap.to(cursor, {
+          x: e.clientX - 9,
+          y: e.clientY - 9,
+          duration: 0.1,
+          ease: "power2.out",
+        });
+      };
+      document.addEventListener("mousemove", onMouseMove);
+
+      /* cursor — video hover */
+      const videos = document.querySelectorAll(".duo-wrap video");
+      videos.forEach((video) => {
+        video.addEventListener("mouseenter", () => {
+          cursor.innerHTML = "SOUND ON";
+          cursor.classList.add("cursor-text-active");
+        });
+        video.addEventListener("mouseleave", () => {
+          cursor.classList.remove("cursor-text-active");
+          cursor.innerHTML = "";
+        });
+      });
+
+      /* cursor — developer row hover (image preview) */
+      const rows = document.querySelectorAll(".dev-row");
+      rows.forEach((row) => {
+        row.addEventListener("mouseenter", () => {
+          cursor.classList.add("cursor-img");
+          cursor.classList.remove("mixBlend");
+          const src = row.getAttribute("data-image");
+          cursor.style.backgroundImage = `url(${src})`;
+        });
+        row.addEventListener("mouseleave", () => {
+          cursor.classList.add("mixBlend");
+          cursor.classList.remove("cursor-img");
+          cursor.style.backgroundImage = "";
+        });
+      });
+
+      /* store context for cleanup */
+      ctx = { gsap, onMouseMove, ScrollTrigger };
+    };
+
+    init();
+
+    return () => {
+      if (ctx?.onMouseMove) document.removeEventListener("mousemove", ctx.onMouseMove);
+      if (ctx?.ScrollTrigger) ctx.ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, []);
+
+  return (
+    <div className="duo-wrap">
+      {/* Custom cursor */}
+      <div ref={cursorRef} className="duo-cursor mixBlend" />
+
+      {/* Single scroll container */}
+      <div id="duo-main">
+
+        {/* ====== HERO ====== */}
+        <section className="hero-section">
+          <div>
+            <h1>Learn Compete</h1>
+            <h2>Collaborate Grow</h2>
+            <video autoPlay muted loop src="/duo/Video/section1-video.mp4" />
+          </div>
+        </section>
+
+        {/* ====== ABOUT ====== */}
+        <section className="about-section">
+          <div className="top">
+            <h1>We are CogiCode,</h1>
+          </div>
+          <div className="bottom">
+            <div className="left">
+              <h3>A CREATIVE COLLECTION MADE TO UNLOCK YOUR BRAND&apos;S POTENTIAL</h3>
             </div>
-            <img
-              src='/coding.png'
-              alt='cognicode_logo'
-              className='w-80 h-80 max-sm:w-64 max-sm:h-64 max-xs:w-48 max-xs:h-48 object-contain'
-            />
+            <div className="right">
+              <p>
+                We weave together bold strategy and creative execution to produce thought-provoking
+                digital experiences. We take a highly personalized approach to delivering branding,
+                web design, and content marketing solutions. Born in the DC area - now serving
+                clients worldwide.
+              </p>
+              <button>About us</button>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== SERVICES ====== */}
+        <section className="services-section">
+          <p>
+            EXPLORE OUR <br />
+            PLATFORM
+          </p>
+
+          <div className="elem">
+            <img className="left img1" src="/duo/images/page4-img1.webp" alt="" />
+            <div className="text">
+              <Link href={userID ? "/learn" : "/login"}><h1>Learn</h1></Link>
+              <Link href={userID ? "/learn" : "/login"}><h1>Learn</h1></Link>
+            </div>
+            <img className="right img2" src="/duo/images/page4-img2.webp" alt="" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Link href="/problems">
-              <FeatureCard title="Problems" description="Dive into a vast array of coding problems to hone your skills and master various algorithms and data structures." />
-            </Link>
-            <Link href="/learn">
-              <FeatureCard title="Learn" description="Master programming fundamentals with our comprehensive learning paths and interactive tutorials." />
-            </Link>
+          <div className="elem">
+            <img className="left img3" src="/duo/images/page4-img3.webp" alt="" />
+            <div className="text">
+              <Link href={userID ? "/problems" : "/login"}><h1>Problems</h1></Link>
+              <Link href={userID ? "/problems" : "/login"}><h1>Problems</h1></Link>
+            </div>
+            <img className="right img4" src="/duo/images/page4-img4.webp" alt="" />
           </div>
+        </section>
 
-          <h2 className="text-3xl font-semibold text-center mt-20">Meet Our Developers</h2>
-          <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto mt-8">
-            {developers.map((developer) => (
-              <DeveloperCard key={developer.name} {...developer} />
-            ))}
+        {/* ====== DEVELOPERS ====== */}
+        <section className="developers-section">
+          <div className="dev-inside">
+            <div className="dev-header">
+              <h1>
+                <span>MEET OUR</span> <span>DEVELOPERS</span>
+              </h1>
+            </div>
+            <div className="dev-row" data-image="/duo/images/home-mentions-verizon.webp">
+              <h4>Dr. Prashant Aggarwal</h4>
+              <p><span>Mentor &amp; Guide</span></p>
+            </div>
+            <div className="dev-row" data-image="/duo/images/home-mentions-awwwards-honorablemention.webp">
+              <h4>Kunal Singh</h4>
+              <p><span>Developer</span></p>
+            </div>
+            <div className="dev-row" data-image="/duo/images/home-mentions-awwwards-mobile.webp">
+              <h4>Manish Pandey</h4>
+              <p><span>Developer</span></p>
+            </div>
+            <div className="dev-row" data-image="/duo/images/home-mentions-mindsparkle.webp">
+              <h4>Kunal Malhotra</h4>
+              <p><span>Developer</span></p>
+            </div>
+            <div className="dev-row" data-image="/duo/images/home-mentions-orpetron.webp">
+              <h4>Lavish Nehra</h4>
+              <p><span>Developer</span></p>
+            </div>
           </div>
-        </div>
-      </main>
-    </>
-  );
-}
+        </section>
 
-function FeatureCard({ title, description }) {
-  return (
-    <div className="bg-light-2 text-dark-1 rounded-xl p-6 shadow-lg hover:bg-dark-1 hover:mt-[-7px] hover:text-white group transition-all ease-in">
-      <h2 className="text-xl font-semibold mb-4 group-hover:underline">{title}</h2>
-      <p className="text-gray-600 group-hover:text-gray-400">{description}</p>
-    </div>
-  );
-}
-
-function DeveloperCard({ name, designation, role, linkedin, github }) {
-  return (
-    <div className='flex items-center w-full cursor-pointer group hover:ml-[15px] transition-all ease-in'>
-      <div className='flex flex-grow flex-wrap gap-3 justify-between items-center bg-gray-100 py-4 px-12 rounded-full group-hover:bg-gray-900 transition-all ease-in'>
-        <div className='flex flex-col'>
-          <div className='flex items-center gap-2'>
-            <h3 className="text-xl font-semibold mb-2 group-hover:text-white">{name}</h3>
-            <p className="text-gray-500 text-sm group-hover:text-gray-400">({designation})</p>
+        {/* ====== FOOTER ====== */}
+        <footer className="simple-footer">
+          <div className="footer-content">
+            <p>&copy; 2024 Cognicode. All rights reserved.</p>
+            <div className="footer-links">
+              <Link href="/learn">Learn</Link>
+              <Link href="/problems">Problems</Link>
+              <Link href="/profile">Profile</Link>
+            </div>
           </div>
-          <p className="text-gray-700 group-hover:text-gray-300">{role}</p>
-        </div>
-        <div className='flex gap-5'>
-          <Link href={linkedin} target="_blank" rel="noopener noreferrer" className="bg-gray-200 rounded-full p-3 group-hover:bg-gray-400 transition-all ease-in">
-            <FaLinkedin className="w-8 h-8 max-sm:w-5 max-sm:h-5 text-blue-700 hover:text-blue-500" />
-          </Link>
-          <Link href={`https://github.com/${github}`} target="_blank" rel="noopener noreferrer" className="bg-gray-200 rounded-full p-3 group-hover:bg-gray-400 transition-all ease-in">
-            <FaGithub className="w-8 h-8 max-sm:w-5 max-sm:h-5 text-gray-700 hover:text-gray-500" />
-          </Link>
-        </div>
+        </footer>
+
       </div>
     </div>
-  )
+  );
 }

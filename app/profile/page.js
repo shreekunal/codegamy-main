@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Chart from "chart.js/auto";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -22,28 +21,18 @@ export default function ProfileSection() {
   }
 
   useEffect(() => {
-
     fetchUserInfo();
   }, []);
 
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo] = useState({
     username: "sultan",
     rankings: {
       problems: {
         total: 50,
         solved: 30,
-        easy: {
-          total: 20,
-          solved: 15,
-        },
-        medium: {
-          total: 20,
-          solved: 10,
-        },
-        tough: {
-          total: 10,
-          solved: 5,
-        },
+        easy: { total: 20, solved: 15 },
+        medium: { total: 20, solved: 10 },
+        tough: { total: 10, solved: 5 },
       },
     },
     badges: [
@@ -54,296 +43,187 @@ export default function ProfileSection() {
       { name: "Knight", image: "/knight_badge.png" },
       { name: "Soldier", image: "/soldier.png" },
     ],
-    age: 20,
-    gender: "Male",
-    college: "IIT Bombay",
-    city: "Mumbai",
-    country: "India",
     skills: {
       Advanced: [
-        { name: "Dynamic Programming ", count: 1 },
-        { name: "Divide and Conquer ", count: 1 },
+        { name: "Dynamic Programming", count: 1 },
+        { name: "Divide and Conquer", count: 1 },
       ],
       Intermediate: [
-        { name: "Hash Table ", count: 2 },
-        { name: "Math ", count: 2 },
-        { name: "Depth-First Search ", count: 3 },
+        { name: "Hash Table", count: 2 },
+        { name: "Math", count: 2 },
+        { name: "Depth-First Search", count: 3 },
       ],
       Fundamental: [
-        { name: "Array ", count: 4 },
-        { name: "String ", count: 2 },
-        { name: "Sorting ", count: 1 },
+        { name: "Array", count: 4 },
+        { name: "String", count: 2 },
+        { name: "Sorting", count: 1 },
       ],
     },
   });
 
-  useEffect(() => {
-    renderLineChart();
-  }, []);
+  /* Info rows for the profile card */
+  const infoRows = [
+    { label: "Age", value: data.age },
+    { label: "Gender", value: data.gender },
+    { label: "College", value: data.college },
+    { label: "City", value: data.city },
+    { label: "Country", value: data.country },
+    { label: "Rating", value: data.rating },
+    { label: "Amount", value: data.amount },
+  ];
 
-  const renderLineChart = () => {
-    const ratingsData = [
-      1500, 1550, 1600, 1650, 1630, 1700, 1750, 1778, 1800, 1900, 2000,
-    ];
-
-    const chartData = {
-      labels: ratingsData.map((_, index) => index + 1),
-      datasets: [
-        {
-          label: "Contest Ratings",
-          data: ratingsData,
-          borderColor: "rgba(59, 130, 246, 1)",
-          tension: 0.4,
-          backgroundColor: 'rgba(59, 130, 246, 0.3)',
-          fill: true,
-        },
-      ],
-    };
-
-    const chartOptions = {
-      responsive: true,
-      aspectRatio: 1.8,
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: "Contest Number",
-            color: 'rgb(107, 114, 128)'
-          },
-          ticks: {
-            color: 'rgb(107, 114, 128)'
-          },
-          grid: {
-            color: "rgba(107, 114, 128, 0.3)"
-          },
-        },
-        y: {
-          title: {
-            display: true,
-            text: "Contest Rating",
-            color: 'rgb(107, 114, 128)'
-          },
-          ticks: {
-            color: 'rgb(107, 114, 128)'
-          },
-          grid: {
-            color: 'rgba(107, 114, 128, 0.3)'
-          }
-        },
-      },
-    };
-
-    const ctx = document.getElementById("contestRatingChart");
-    if (ctx) {
-      const existingChart = Chart.getChart(ctx);
-      if (existingChart) {
-        existingChart.destroy();
-      }
-
-      new Chart(ctx, {
-        type: "line",
-        data: chartData,
-        options: chartOptions,
-      });
-    }
-  };
+  const totalSolved =
+    userInfo.rankings.problems.easy.solved +
+    userInfo.rankings.problems.medium.solved +
+    userInfo.rankings.problems.tough.solved;
 
   return (
-    <div className="flex w-full max-w-6xl mx-auto gap-8 px-3 py-2 my-12 max-lg:flex-col max-lg:items-center">
-      <div className="w-full max-w-[400px] flex flex-col gap-8">
-        <div className="w-full bg-light-2 rounded-xl shadow-xl px-4 py-4 flex flex-col gap-2 group hover:bg-dark-1 transition-all ease-in hover:scale-[1.03]">
-          <h2 className="text-2xl font-semibold text-gray-800 group-hover:text-white transition-all ease-in">
-            {data.name}
-          </h2>
-          <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-gray-200 transition-all ease-in">
-            Additional Info
-          </h3>
-          <div className="flex items-center gap-2">
-            <div className="font-medium min-w-24 text-gray-700 group-hover:text-gray-400 transition-all ease-in">Age:</div>
-            <div className="text-gray-700 group-hover:text-gray-300 transition-all ease-in">{data.age}</div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="font-medium min-w-24 text-gray-700 group-hover:text-gray-400 transition-all ease-in">Gender:</div>
-            <div className="text-gray-700 group-hover:text-gray-300 transition-all ease-in">{data.gender}</div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="font-medium min-w-24 text-gray-700 group-hover:text-gray-400 transition-all ease-in">College:</div>
-            <div className="text-gray-700 group-hover:text-gray-300 transition-all ease-in">{data.college}</div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="font-medium min-w-24 text-gray-700 group-hover:text-gray-400 transition-all ease-in">City:</div>
-            <div className="text-gray-700 group-hover:text-gray-300 transition-all ease-in">{data.city}</div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="font-medium min-w-24 text-gray-700 group-hover:text-gray-400 transition-all ease-in">Country:</div>
-            <div className="text-gray-700 group-hover:text-gray-300 transition-all ease-in">{data.country}</div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="font-medium min-w-24 text-gray-700 group-hover:text-gray-400 transition-all ease-in">Rating:</div>
-            <div className="text-gray-700 group-hover:text-gray-300 transition-all ease-in">{data.rating}</div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="font-medium min-w-24 text-gray-700 group-hover:text-gray-400 transition-all ease-in">Amount:</div>
-            <div className="text-gray-700 group-hover:text-gray-300 transition-all ease-in">{data.amount}</div>
-          </div>
-          <Link href="/edit-profile" className="mt-2 bg-dark-1 group-hover:bg-dark-3 text-white font-bold py-2 px-4 rounded-xl text-center transition-all ease-in ">
-            Edit Profile
-          </Link>
-          <Link href="/login" className="bg-red-500 group-hover:bg-red-500 text-white font-bold py-2 px-4 rounded-xl text-center transition-all ease-in ">
-            Logout
-          </Link>
-        </div>
-
-        <div className="w-full bg-light-2 rounded-xl shadow-xl px-4 py-4 flex flex-col gap-2 group hover:bg-dark-1 transition-all ease-in hover:scale-[1.03]">
-          <h3 className="text-lg font-semibold text-dark-1 group-hover:text-white mb-2">Skills</h3>
-          {Object.entries(userInfo.skills).map(([category, skills]) => (
-            <div key={category} className="mb-4">
-              <h4 className="text-md font-semibold text-dark-3 group-hover:text-gray-300 mb-2">
-                {category}
-              </h4>
-              <ul className="list-disc list-inside">
-                {skills.map((skill, index) => (
-                  <li key={index} className="text-gray-700 group-hover:text-gray-400">
-                    {skill.name} ⨯{skill.count}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+    <div className="w-full max-w-6xl mx-auto px-4 py-10 min-h-screen">
+      {/* Page header */}
+      <div className="mb-10 animate-on-load animate-slide-down">
+        <h1 className="text-3xl font-bold text-dark-1 dark:text-light-1">Profile</h1>
+        <div className="h-1 w-12 bg-accent rounded-full mt-2"></div>
       </div>
 
-      <div className="flex-grow relative w-full max-w-[700px]">
-        <div className="flex flex-col gap-8">
-          <div className="w-full bg-light-2 shadow-xl rounded-xl p-6 hover:bg-dark-1 hover:scale-[1.03] transition-all ease-in">
-            <canvas id="contestRatingChart"></canvas>
-          </div>
+      {/* Main grid — left sidebar / right content */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-          <div className="w-full bg-light-2 shadow-xl rounded-xl p-6 hover:bg-dark-1 group hover:scale-[1.03] transition-all ease-in">
-            <h2 className="mb-5 group-hover:text-white">Solved Problems</h2>
-            <div className="flex gap-8 items-center w-full mb-5 max-sm:flex-col max-sm:items-start  ">
+        {/* === LEFT COLUMN (1/3) === */}
+        <div className="flex flex-col gap-6 lg:col-span-1">
 
-              <div className="bg-light-4 rounded-full min-h-[100px] min-w-[100px] flex justify-center items-center">
-                <div className="bg-light-2 rounded-full min-h-[85px] min-w-[85px] flex flex-col justify-center items-center">
-                  <h1 className="font-medium">490</h1>
-                  <p>Solved</p>
+          {/* User Info Card */}
+          <div className="bg-light-2 dark:bg-dark-3 rounded-2xl shadow-lg p-6 card-hover border border-transparent hover:border-accent/20 animate-on-load animate-slide-up delay-100">
+            <h2 className="text-2xl font-bold text-dark-1 dark:text-light-1 mb-1">
+              {data.name || "User"}
+            </h2>
+            <p className="text-sm text-gray-1 dark:text-gray-2 mb-4">{data.email}</p>
+
+            <div className="space-y-2.5">
+              {infoRows.map((row) => (
+                <div key={row.label} className="flex items-center gap-2">
+                  <span className="font-medium min-w-[80px] text-sm text-gray-1 dark:text-gray-2">{row.label}:</span>
+                  <span className="text-sm text-dark-1 dark:text-light-4">{row.value || "—"}</span>
                 </div>
-              </div>
-
-              <div className="flex-grow w-full">
-                <div className="flex items-center flex-grow mb-2">
-                  <div className="w-20 mr-2 group-hover:text-gray-300">Easy:</div>
-                  <div className="flex bg-gray-200 h-4 rounded-full flex-grow">
-                    <div
-                      className="bg-green-500 h-full rounded-full"
-                      style={{
-                        width: `${(userInfo.rankings.problems.easy.solved /
-                            userInfo.rankings.problems.easy.total) *
-                          100
-                          }%`,
-                      }}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center mb-2">
-                  <div className="w-20 mr-2 group-hover:text-gray-300">Medium:</div>
-                  <div className="flex bg-gray-200 h-4 rounded-full flex-grow">
-                    <div
-                      className="bg-yellow-500 h-full rounded-full"
-                      style={{
-                        width: `${(userInfo.rankings.problems.medium.solved /
-                            userInfo.rankings.problems.medium.total) *
-                          100
-                          }%`,
-                      }}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center mb-2">
-                  <div className="w-20 mr-2 group-hover:text-gray-300">Tough:</div>
-                  <div className="flex bg-gray-200 h-4 rounded-full flex-grow">
-                    <div
-                      className="bg-red-500 h-full rounded-full"
-                      style={{
-                        width: `${(userInfo.rankings.problems.tough.solved /
-                            userInfo.rankings.problems.tough.total) *
-                          100
-                          }%`,
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
-          </div>
 
-          <div className="flex justify-between">
-            <div className="flex-grow max-w-full bg-light-2 shadow-xl rounded-xl p-6 hover:bg-dark-1 transition-all ease-in hover:scale-[1.03] group">
-              <h3 className="text-lg font-semibold mb-2 group-hover:text-white">
-                Badges
-              </h3>
-              <Carousel
-                additionalTransfrom={0}
-                arrows
-                autoPlaySpeed={3000}
-                centerMode={true}
-                containerClass="carousel-container"
-                draggable
-                focusOnSelect={false}
-                infinite
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={true}
-                renderDotsOutside={false}
-                responsive={{
-                  desktop: {
-                    breakpoint: {
-                      max: 3000,
-                      min: 1024,
-                    },
-                    items: 2,
-                    partialVisibilityGutter: 40,
-                  },
-                  mobile: {
-                    breakpoint: {
-                      max: 464,
-                      min: 0,
-                    },
-                    items: 1,
-                    partialVisibilityGutter: 30,
-                  },
-                  tablet: {
-                    breakpoint: {
-                      max: 1024,
-                      min: 464,
-                    },
-                    items: 2,
-                    partialVisibilityGutter: 30,
-                  },
-                }}
-                showDots={false}
-                slidesToSlide={1}
-                swipeable
+            <div className="flex flex-col gap-2 mt-5">
+              <Link
+                href="/edit-profile"
+                className="bg-accent hover:bg-accent-dark text-white font-semibold py-2.5 px-4 rounded-xl text-center text-sm transition-colors duration-300"
               >
-                {userInfo.badges.map((badge, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-center items-center h-40 gap-10"
-                  >
-                    <img
-                      src={badge.image}
-                      alt={badge.name}
-                      className="w-32 h-32 object-contain rounded-full my-auto"
-                    />
-                  </div>
-                ))}
-              </Carousel>
+                Edit Profile
+              </Link>
+              <Link
+                href="/login"
+                className="bg-light-3 dark:bg-dark-4 hover:bg-light-4 dark:hover:bg-dark-2 text-dark-1 dark:text-light-1 font-semibold py-2.5 px-4 rounded-xl text-center text-sm transition-colors duration-300"
+              >
+                Logout
+              </Link>
             </div>
+          </div>
+
+          {/* Skills Card */}
+          <div className="bg-light-2 dark:bg-dark-3 rounded-2xl shadow-lg p-6 card-hover border border-transparent hover:border-accent/20 animate-on-load animate-slide-up delay-300">
+            <h3 className="text-lg font-bold text-dark-1 dark:text-light-1 mb-4">Skills</h3>
+            {Object.entries(userInfo.skills).map(([category, skills]) => (
+              <div key={category} className="mb-4 last:mb-0">
+                <h4 className="text-sm font-semibold text-accent mb-1.5">{category}</h4>
+                <div className="flex flex-wrap gap-2">
+                  {skills.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="text-xs bg-light-3 dark:bg-dark-4 text-dark-1 dark:text-light-4 px-3 py-1.5 rounded-full border border-light-4 dark:border-dark-4"
+                    >
+                      {skill.name} <span className="text-accent font-semibold">×{skill.count}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* === RIGHT COLUMN (2/3) === */}
+        <div className="flex flex-col gap-6 lg:col-span-2">
+
+          {/* Solved Problems Card */}
+          <div className="bg-light-2 dark:bg-dark-3 rounded-2xl shadow-lg p-6 card-hover border border-transparent hover:border-accent/20 animate-on-load animate-slide-up delay-200">
+            <h3 className="text-lg font-bold text-dark-1 dark:text-light-1 mb-5">Solved Problems</h3>
+            <div className="flex gap-8 items-center w-full max-sm:flex-col max-sm:items-start">
+
+              {/* Donut-style circle */}
+              <div className="relative min-w-[110px] min-h-[110px]">
+                <div className="w-[110px] h-[110px] rounded-full bg-light-4 dark:bg-dark-4 flex justify-center items-center">
+                  <div className="w-[90px] h-[90px] rounded-full bg-light-2 dark:bg-dark-3 flex flex-col justify-center items-center">
+                    <span className="text-2xl font-bold text-dark-1 dark:text-light-1">{totalSolved}</span>
+                    <span className="text-xs text-gray-1 dark:text-gray-2">Solved</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Progress bars */}
+              <div className="flex-grow w-full space-y-3">
+                <ProgressBar label="Easy" solved={userInfo.rankings.problems.easy.solved} total={userInfo.rankings.problems.easy.total} color="bg-green-500" />
+                <ProgressBar label="Medium" solved={userInfo.rankings.problems.medium.solved} total={userInfo.rankings.problems.medium.total} color="bg-yellow-500" />
+                <ProgressBar label="Tough" solved={userInfo.rankings.problems.tough.solved} total={userInfo.rankings.problems.tough.total} color="bg-accent" />
+              </div>
+            </div>
+          </div>
+
+          {/* Badges Card */}
+          <div className="bg-light-2 dark:bg-dark-3 rounded-2xl shadow-lg p-6 card-hover border border-transparent hover:border-accent/20 animate-on-load animate-slide-up delay-400">
+            <h3 className="text-lg font-bold text-dark-1 dark:text-light-1 mb-4">Badges</h3>
+            <Carousel
+              additionalTransfrom={0}
+              arrows
+              autoPlaySpeed={3000}
+              centerMode={true}
+              containerClass="carousel-container"
+              draggable
+              focusOnSelect={false}
+              infinite
+              keyBoardControl
+              minimumTouchDrag={80}
+              renderButtonGroupOutside={true}
+              renderDotsOutside={false}
+              responsive={{
+                desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3, partialVisibilityGutter: 40 },
+                tablet: { breakpoint: { max: 1024, min: 464 }, items: 2, partialVisibilityGutter: 30 },
+                mobile: { breakpoint: { max: 464, min: 0 }, items: 1, partialVisibilityGutter: 30 },
+              }}
+              showDots={false}
+              slidesToSlide={1}
+              swipeable
+            >
+              {userInfo.badges.map((badge, index) => (
+                <div key={index} className="flex flex-col justify-center items-center h-44 px-2">
+                  <img
+                    src={badge.image}
+                    alt={badge.name}
+                    className="w-28 h-28 object-contain rounded-full ring-2 ring-light-4 dark:ring-dark-4 hover:ring-accent transition-all duration-300"
+                  />
+                  <span className="mt-2 text-xs font-medium text-gray-1 dark:text-gray-2">{badge.name}</span>
+                </div>
+              ))}
+            </Carousel>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* Reusable progress bar */
+function ProgressBar({ label, solved, total, color }) {
+  const pct = total > 0 ? Math.round((solved / total) * 100) : 0;
+  return (
+    <div className="flex items-center gap-3">
+      <span className="w-16 text-sm font-medium text-gray-1 dark:text-light-4">{label}</span>
+      <div className="flex-grow h-3 bg-light-4 dark:bg-dark-4 rounded-full overflow-hidden">
+        <div className={`${color} h-full rounded-full transition-all duration-700 ease-out`} style={{ width: `${pct}%` }} />
+      </div>
+      <span className="text-xs text-gray-1 dark:text-gray-2 min-w-[40px] text-right">{solved}/{total}</span>
     </div>
   );
 }

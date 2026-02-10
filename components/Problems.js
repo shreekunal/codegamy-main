@@ -40,7 +40,7 @@ const Problems = () => {
             <div className="p-10 max-md:p-3">
                 <div className="relative overflow-auto rounded-xl shadow-xl max-w-6xl mx-auto">
                     <table className="w-full text-sm text-left rtl:text-right">
-                        <thead className=" text-gray-700 uppercase bg-light-3">
+                        <thead className=" text-gray-700 uppercase bg-light-3 dark:bg-dark-3 dark:text-light-1">
                             <tr>
                                 <th scope="col" className="p-6">
                                     Sr No.
@@ -64,7 +64,7 @@ const Problems = () => {
                         </thead>
                         <tbody>
                             {problems.map((problem, index) => (
-                                <tr key={index} className="bg-light-2 hover:bg-light-4">
+                                <tr key={index} className="bg-light-2 dark:bg-dark-3 hover:bg-light-4 dark:hover:bg-dark-4">
                                     <td className="p-4 text-center">
                                         <div>
                                             {index + 1}
@@ -100,8 +100,8 @@ const Problems = () => {
             </div>
             {selectedVideo && (
                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex justify-center items-center z-50 p-2">
-                    <div className="w-full max-w-xl bg-white p-8 rounded-lg flex flex-col items-end gap-2 max-sm:p-3">
-                        <button onClick={closeVideoPopup} className="text-gray-600 hover:text-gray-800 focus:outline-none">
+                    <div className="w-full max-w-xl bg-white dark:bg-dark-2 text-dark-1 dark:text-light-1 p-8 rounded-lg flex flex-col items-end gap-2 max-sm:p-3">
+                        <button onClick={closeVideoPopup} className="text-gray-1 dark:text-gray-2 hover:text-accent focus:outline-none transition-colors">
                             Close
                         </button>
                         <iframe

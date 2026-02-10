@@ -33,18 +33,18 @@ const Timer = () => {
     <div>
       {showTimer ? (
         <div
-          className="flex items-center justify-center rounded-lg cursor-pointer hover:bg-light-3 hover:border-light-4 py-1 px-2"
+          className="flex items-center justify-center rounded-lg cursor-pointer hover:bg-light-3 dark:hover:bg-dark-4 hover:border-light-4 py-1 px-2"
           onClick={() => {
             setShowTimer(false);
             setTime(0);
           }}
         >
           <div>{formatTime(time)}</div>
-          <RiTimerFlashLine size={24} color="#474747" />
+          <RiTimerFlashLine size={24} className="text-dark-4 dark:text-light-4" />
         </div>
       ) : (
-        <div className="flex items-center justify-center rounded-lg cursor-pointer hover:bg-light-3 hover:border-light-4 py-1 px-1">
-          <MdAlarm size={24} color="#474747" onClick={() => setShowTimer(true)} />
+        <div className="flex items-center justify-center rounded-lg cursor-pointer hover:bg-light-3 dark:hover:bg-dark-4 hover:border-light-4 py-1 px-1">
+          <MdAlarm size={24} className="text-dark-4 dark:text-light-4" onClick={() => setShowTimer(true)} />
         </div>
       )}
     </div>

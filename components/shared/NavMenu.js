@@ -28,7 +28,7 @@ const NavMenu = ({ user }) => {
           <Link
             href={user ? "/learn" : "/login"}
             className={`py-2 px-6 font-medium ${(pathname === "/learn" || pathname.startsWith("/courses")) &&
-              "bg-dark-1 text-white dark:bg-purple-500 rounded-full"
+              "bg-dark-1 text-white dark:bg-accent rounded-full"
               }`}
             onClick={() => setOpen(false)}
           >
@@ -36,11 +36,19 @@ const NavMenu = ({ user }) => {
           </Link>
           <Link
             href={user ? "/problems" : "/login"}
-            className={`py-2 px-6 font-medium ${pathname === "/problems" && "bg-dark-1 text-white dark:bg-purple-500 rounded-full"
+            className={`py-2 px-6 font-medium ${pathname === "/problems" && "bg-dark-1 text-white dark:bg-accent rounded-full"
               }`}
             onClick={() => setOpen(false)}
           >
             Problems
+          </Link>
+          <Link
+            href={user ? "/profile" : "/login"}
+            className={`py-2 px-6 font-medium ${pathname === "/profile" && "bg-dark-1 text-white dark:bg-accent rounded-full border-b-2 border-accent"
+              }`}
+            onClick={() => setOpen(false)}
+          >
+            Profile
           </Link>
         </div>
       </div>

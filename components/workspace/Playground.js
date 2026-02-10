@@ -140,8 +140,8 @@ const Playground = ({ problems, isForSubmission = true, setSubmitted }) => {
         </div>
         <div className="flex gap-2 items-center">
           <Timer />
-          <button onClick={handleFullScreen} className="hover:bg-light-3 hover:border-light-4 rounded-lg p-1">
-            <div className="h-6 w-6 font-bold text-2xl text-dark-4">
+          <button onClick={handleFullScreen} className="hover:bg-light-3 dark:hover:bg-dark-4 hover:border-light-4 dark:hover:border-dark-3 rounded-lg p-1">
+            <div className="h-6 w-6 font-bold text-2xl text-dark-4 dark:text-light-4">
               {!isFullScreen ? (
                 <AiOutlineFullscreen />
               ) : (
@@ -170,7 +170,7 @@ const Playground = ({ problems, isForSubmission = true, setSubmitted }) => {
             <button
               onClick={() => handleCompile(customInput)}
               disabled={!code}
-              className={`px-4 py-2 bg-dark-4 text-light-1 mt-2 rounded-lg text-sm`}
+              className={`px-4 py-2 bg-dark-4 dark:bg-dark-4 text-light-1 mt-2 rounded-lg text-sm hover:bg-dark-1 dark:hover:bg-gray-1 transition-colors`}
             >
               {isCodeRunning ? <Loader /> : "Run"}
             </button>
@@ -178,7 +178,7 @@ const Playground = ({ problems, isForSubmission = true, setSubmitted }) => {
               <button
                 onClick={handleSubmit}
                 disabled={!code}
-                className={`px-4 py-2 bg-green-600 text-light-1 mt-2 rounded-lg text-sm`}
+                className={`px-4 py-2 bg-green-600 hover:bg-green-700 text-light-1 mt-2 rounded-lg text-sm transition-colors`}
               >
                 {isCodeSubmitting ? <Loader /> : "Submit"}
               </button>
@@ -214,7 +214,7 @@ const Playground = ({ problems, isForSubmission = true, setSubmitted }) => {
             <button
               onClick={() => handleCompile(customInput)}
               disabled={!code}
-              className={`px-4 py-2 bg-dark-4 text-light-1 mt-2 rounded-lg text-sm`}
+              className={`px-4 py-2 bg-dark-4 dark:bg-dark-4 text-light-1 mt-2 rounded-lg text-sm hover:bg-dark-1 dark:hover:bg-gray-1 transition-colors`}
             >
               {isCodeRunning ? <Loader /> : "Run"}
             </button>
@@ -222,7 +222,7 @@ const Playground = ({ problems, isForSubmission = true, setSubmitted }) => {
               <button
                 onClick={handleSubmit}
                 disabled={!code}
-                className={`px-4 py-2 bg-green-600 text-light-1 mt-2 rounded-lg text-sm`}
+                className={`px-4 py-2 bg-green-600 hover:bg-green-700 text-light-1 mt-2 rounded-lg text-sm transition-colors`}
               >
                 {isCodeSubmitting ? <Loader /> : "Submit"}
               </button>

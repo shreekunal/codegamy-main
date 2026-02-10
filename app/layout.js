@@ -1,7 +1,6 @@
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
 import Providers from "@/components/Providers";
+import LayoutShell from "@/components/shared/LayoutShell";
 
 export const dynamic = 'force-dynamic';
 
@@ -15,9 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Providers>
-          <Navbar />
-          {children}
-          <Footer />
+          <LayoutShell>{children}</LayoutShell>
         </Providers>
       </body>
     </html>
